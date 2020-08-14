@@ -690,12 +690,15 @@ func (env *azureEnviron) createVirtualMachine(
 		vmDependsOn = append(vmDependsOn, availabilitySetId)
 	}
 
+
+	/*
 	publicIPAddressName := vmName + "-public-ip"
 	publicIPAddressId := fmt.Sprintf(`[resourceId('Microsoft.Network/publicIPAddresses', '%s')]`, publicIPAddressName)
 	publicIPAddressAllocationMethod := network.Static
 	if env.config.loadBalancerSkuName == string(network.LoadBalancerSkuNameBasic) {
 		publicIPAddressAllocationMethod = network.Dynamic // preserve the settings that were used in Juju 2.4 and earlier
 	}
+        
 	resources = append(resources, armtemplates.Resource{
 		APIVersion: networkAPIVersion,
 		Type:       "Microsoft.Network/publicIPAddresses",
@@ -707,8 +710,7 @@ func (env *azureEnviron) createVirtualMachine(
 			PublicIPAddressVersion:   network.IPv4,
 			PublicIPAllocationMethod: publicIPAddressAllocationMethod,
 		},
-	})
-
+	})*/
 	// Controller and non-controller machines are assigned to separate
 	// subnets. This enables us to create controller-specific NSG rules
 	// just by targeting the controller subnet.
@@ -729,7 +731,7 @@ func (env *azureEnviron) createVirtualMachine(
 	}
 	nicName := vmName + "-primary"
 	nicId := fmt.Sprintf(`[resourceId('Microsoft.Network/networkInterfaces', '%s')]`, nicName)
-	nicDependsOn = append(nicDependsOn, publicIPAddressId)
+	nicDependsOn = append(nicDependsOn)
 	ipConfigurations := []network.InterfaceIPConfiguration{{
 		Name: to.StringPtr("primary"),
 		InterfaceIPConfigurationPropertiesFormat: &network.InterfaceIPConfigurationPropertiesFormat{
@@ -737,9 +739,6 @@ func (env *azureEnviron) createVirtualMachine(
 			PrivateIPAddress:          to.StringPtr(privateIP.String()),
 			PrivateIPAllocationMethod: network.Static,
 			Subnet:                    &network.Subnet{ID: to.StringPtr(subnetId)},
-			PublicIPAddress: &network.PublicIPAddress{
-				ID: to.StringPtr(publicIPAddressId),
-			},
 		},
 	}}
 	resources = append(resources, armtemplates.Resource{
