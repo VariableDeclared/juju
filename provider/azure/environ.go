@@ -733,17 +733,16 @@ func (env *azureEnviron) createVirtualMachine(
 	// subnets. This enables us to create controller-specific NSG rules
 	// just by targeting the controller subnet.
 	subnetName := internalSubnetName
-	subnetPrefix := internalSubnetPrefix
+
 	if instanceConfig.Controller != nil {
 		subnetName = controllerSubnetName
-		subnetPrefix = controllerSubnetPrefix
 	}
 	subnetId := fmt.Sprintf(
 		`[concat(resourceId('Microsoft.Network/virtualNetworks', '%s'), '/subnets/%s')]`,
 		internalNetworkName, subnetName,
 	)
 
-	privateIP, err := machineSubnetIP(subnetPrefix, instanceConfig.MachineId)
+        //privateIP, err := machineSubnetIP(subnetPrefix, instanceConfig.MachineId)
 	if err != nil {
 		return errors.Annotatef(err, "computing private IP address")
 	}
@@ -754,8 +753,7 @@ func (env *azureEnviron) createVirtualMachine(
 		Name: to.StringPtr("primary"),
 		InterfaceIPConfigurationPropertiesFormat: &network.InterfaceIPConfigurationPropertiesFormat{
 			Primary:                   to.BoolPtr(true),
-			PrivateIPAddress:          to.StringPtr(privateIP.String()),
-			PrivateIPAllocationMethod: network.Static,
+			PrivateIPAllocationMethod: network.Dynamic,
 			Subnet:                    &network.Subnet{ID: to.StringPtr(subnetId)},
 		},
 	}}
