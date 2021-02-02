@@ -4056,6 +4056,9 @@
                         "cpu-power": {
                             "type": "integer"
                         },
+                        "custom-naming-convention": {
+                            "type": "string"
+                        },
                         "instance-type": {
                             "type": "string"
                         },
@@ -8009,6 +8012,9 @@
                         },
                         "cpu-power": {
                             "type": "integer"
+                        },
+                        "custom-naming-convention": {
+                            "type": "string"
                         },
                         "instance-type": {
                             "type": "string"
@@ -12025,6 +12031,9 @@
                         },
                         "cpu-power": {
                             "type": "integer"
+                        },
+                        "custom-naming-convention": {
+                            "type": "string"
                         },
                         "instance-type": {
                             "type": "string"
@@ -16068,6 +16077,9 @@
                         "cpu-power": {
                             "type": "integer"
                         },
+                        "custom-naming-convention": {
+                            "type": "string"
+                        },
                         "instance-type": {
                             "type": "string"
                         },
@@ -17226,6 +17238,9 @@
                         },
                         "cpu-power": {
                             "type": "integer"
+                        },
+                        "custom-naming-convention": {
+                            "type": "string"
                         },
                         "instance-type": {
                             "type": "string"
@@ -22211,6 +22226,9 @@
                         "cpu-power": {
                             "type": "integer"
                         },
+                        "custom-naming-convention": {
+                            "type": "string"
+                        },
                         "instance-type": {
                             "type": "string"
                         },
@@ -26126,6 +26144,9 @@
                         },
                         "cpu-power": {
                             "type": "integer"
+                        },
+                        "custom-naming-convention": {
+                            "type": "string"
                         },
                         "instance-type": {
                             "type": "string"
@@ -34273,6 +34294,9 @@
                         },
                         "cpu-power": {
                             "type": "integer"
+                        },
+                        "custom-naming-convention": {
+                            "type": "string"
                         },
                         "instance-type": {
                             "type": "string"

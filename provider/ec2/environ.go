@@ -590,10 +590,14 @@ func (e *environ) StartInstance(
 		logger.Infof("started instance %q in AZ %q", inst.Id(), instAZ)
 	}
 
-	// Tag instance, for accounting and identification.
-	instanceName := resourceName(
-		names.NewMachineTag(args.InstanceConfig.MachineId), e.Config().Name(),
-	)
+	instanceName := ""
+	if (args.Constraints.CustomNamingConvention != nil) {
+		// Tag instance, for accounting and identification.
+		instanceName = fmt.Sprintf("%s-%s", *args.Constraints.CustomNamingConvention, resourceName(
+			names.NewMachineTag(args.InstanceConfig.MachineId), e.Config().Name(),
+		))
+	}
+
 	args.InstanceConfig.Tags[tagName] = instanceName
 	if err := tagResources(e.ec2, ctx, args.InstanceConfig.Tags, string(inst.Id())); err != nil {
 		return nil, annotateWrapError(err, "tagging instance")

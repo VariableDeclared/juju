@@ -35,6 +35,7 @@ const (
 	VirtType         = "virt-type"
 	Zones            = "zones"
 	AllocatePublicIP = "allocate-public-ip"
+	CustomNamingConvention = "custom-naming-convention"
 )
 
 // Value describes a user's requirements of the hardware on which units
@@ -104,6 +105,12 @@ type Value struct {
 	// The default behaviour if the value is not specified is to allocate
 	// a public IP so that public cloud behaviour works out of the box.
 	AllocatePublicIP *bool `json:"allocate-public-ip,omitempty" yaml:"allocate-public-ip,omitempty"`
+
+	// AllocatePublicIP, if nil or true, signals that machines should be
+	// created with a public IP address instead of a cloud local one.
+	// The default behaviour if the value is not specified is to allocate
+	// a public IP so that public cloud behaviour works out of the box.
+	CustomNamingConvention *string `json:"custom-naming-convention,omitempty" yaml:"custom-naming-convention,omitempty"`
 }
 
 var rawAliases = map[string]string{
@@ -500,6 +507,8 @@ func (v *Value) setRaw(name, str string) error {
 		err = v.setZones(str)
 	case AllocatePublicIP:
 		err = v.setAllocatePublicIP(str)
+	case CustomNamingConvention:
+		err = v.setCustomNamingConvention(str)
 	default:
 		return errors.Errorf("unknown constraint %q", name)
 	}
@@ -718,6 +727,14 @@ func (v *Value) setAllocatePublicIP(str string) (err error) {
 	}
 	v.AllocatePublicIP, err = parseBool(str)
 	return
+}
+
+func (v *Value) setCustomNamingConvention(str string) (err error) {
+	if v.CustomNamingConvention != nil {
+		return errors.Errorf("already set")
+	}
+	v.CustomNamingConvention = &str
+	return nil
 }
 
 func parseBool(str string) (*bool, error) {

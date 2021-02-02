@@ -570,9 +570,15 @@ func (env *azureEnviron) StartInstance(ctx context.ProviderCallContext, args env
 		return nil, err
 	}
 
+
 	machineTag := names.NewMachineTag(args.InstanceConfig.MachineId)
 	vmName := resourceName(machineTag)
+	if (args.Constraints.CustomNamingConvention != nil) {
+		vmName = fmt.Sprintf("%s-%s", *args.Constraints.CustomNamingConvention, vmName)
+	}
+
 	vmTags := make(map[string]string)
+
 	for k, v := range args.InstanceConfig.Tags {
 		vmTags[k] = v
 	}
