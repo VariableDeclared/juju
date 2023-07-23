@@ -16,6 +16,7 @@ var unsupportedConstraints = []string{
 	constraints.Spaces,
 	constraints.AllocatePublicIP,
 	constraints.ImageID,
+	constraints.ConfidentialComputing,
 }
 
 // ConstraintsValidator returns a Validator value which is used to

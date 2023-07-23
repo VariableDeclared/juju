@@ -23,20 +23,21 @@ const (
 	Arch      = "arch"
 	Container = "container"
 	// cpuCores is an alias for Cores.
-	cpuCores         = "cpu-cores"
-	Cores            = "cores"
-	CpuPower         = "cpu-power"
-	Mem              = "mem"
-	RootDisk         = "root-disk"
-	RootDiskSource   = "root-disk-source"
-	Tags             = "tags"
-	InstanceRole     = "instance-role"
-	InstanceType     = "instance-type"
-	Spaces           = "spaces"
-	VirtType         = "virt-type"
-	Zones            = "zones"
-	AllocatePublicIP = "allocate-public-ip"
-	ImageID          = "image-id"
+	cpuCores              = "cpu-cores"
+	Cores                 = "cores"
+	CpuPower              = "cpu-power"
+	Mem                   = "mem"
+	RootDisk              = "root-disk"
+	RootDiskSource        = "root-disk-source"
+	Tags                  = "tags"
+	InstanceRole          = "instance-role"
+	InstanceType          = "instance-type"
+	Spaces                = "spaces"
+	VirtType              = "virt-type"
+	Zones                 = "zones"
+	AllocatePublicIP      = "allocate-public-ip"
+	ImageID               = "image-id"
+	ConfidentialComputing = "confidential-computing"
 )
 
 // Value describes a user's requirements of the hardware on which units
@@ -112,6 +113,7 @@ type Value struct {
 	// a public IP so that public cloud behaviour works out of the box.
 	AllocatePublicIP *bool `json:"allocate-public-ip,omitempty" yaml:"allocate-public-ip,omitempty"`
 
+	ConfidentialComputing *bool `json:"confidential-computing,omitempty" yaml:"confidential-computing,omitempty"`
 	// ImageID, if not nil, indicates that a machine must use the specified
 	// image. This is provider specific, and for the moment is only
 	// implemented on MAAS clouds.
@@ -236,6 +238,11 @@ func (v *Value) HasZones() bool {
 // HasAllocatePublicIP returns whether the allocate-public-ip constraint was specified.
 func (v *Value) HasAllocatePublicIP() bool {
 	return v.AllocatePublicIP != nil
+}
+
+// HasConfidentialComputing returns whether the confidential-computing constraint was specified.
+func (v *Value) HasConfidentialComputing() bool {
+	return v.ConfidentialComputing != nil
 }
 
 // HasImageID returns true if the constraints.Value specifies an image-id.

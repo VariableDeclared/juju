@@ -56,6 +56,9 @@ type InstanceSpec struct {
 	// AllocatePublicIP is true if the instance should be assigned a public IP
 	// address, exposing it to access from outside the internal network.
 	AllocatePublicIP bool
+
+	//EnableConfidentialComputing for TEE VMs.
+	ConfidentialComputing bool
 }
 
 func (is InstanceSpec) raw() *compute.Instance {

@@ -192,15 +192,21 @@ func (env *environ) newRawInstance(
 		allocatePublicIP = *args.Constraints.AllocatePublicIP
 	}
 
+	confidentialComputing := false
+	if args.Constraints.HasConfidentialComputing() {
+		confidentialComputing = *args.Constraints.ConfidentialComputing
+	}
+
 	inst, err := env.gce.AddInstance(google.InstanceSpec{
-		ID:                hostname,
-		Type:              spec.InstanceType.Name,
-		Disks:             disks,
-		NetworkInterfaces: []string{"ExternalNAT"},
-		Metadata:          metadata,
-		Tags:              tags,
-		AvailabilityZone:  args.AvailabilityZone,
-		AllocatePublicIP:  allocatePublicIP,
+		ID:                    hostname,
+		Type:                  spec.InstanceType.Name,
+		Disks:                 disks,
+		NetworkInterfaces:     []string{"ExternalNAT"},
+		Metadata:              metadata,
+		Tags:                  tags,
+		AvailabilityZone:      args.AvailabilityZone,
+		AllocatePublicIP:      allocatePublicIP,
+		ConfidentialComputing: confidentialComputing,
 	})
 	if err != nil {
 		// We currently treat all AddInstance failures

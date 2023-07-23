@@ -4386,6 +4386,9 @@
                         "arch": {
                             "type": "string"
                         },
+                        "confidential-computing": {
+                            "type": "boolean"
+                        },
                         "container": {
                             "type": "string"
                         },
@@ -8595,6 +8598,9 @@
                         },
                         "arch": {
                             "type": "string"
+                        },
+                        "confidential-computing": {
+                            "type": "boolean"
                         },
                         "container": {
                             "type": "string"
@@ -14743,6 +14749,9 @@
                         "arch": {
                             "type": "string"
                         },
+                        "confidential-computing": {
+                            "type": "boolean"
+                        },
                         "container": {
                             "type": "string"
                         },
@@ -18436,6 +18445,9 @@
                         },
                         "arch": {
                             "type": "string"
+                        },
+                        "confidential-computing": {
+                            "type": "boolean"
                         },
                         "container": {
                             "type": "string"
@@ -24086,6 +24098,9 @@
                         "arch": {
                             "type": "string"
                         },
+                        "confidential-computing": {
+                            "type": "boolean"
+                        },
                         "container": {
                             "type": "string"
                         },
@@ -27964,6 +27979,9 @@
                         "arch": {
                             "type": "string"
                         },
+                        "confidential-computing": {
+                            "type": "boolean"
+                        },
                         "container": {
                             "type": "string"
                         },
@@ -31342,6 +31360,9 @@
                         },
                         "arch": {
                             "type": "string"
+                        },
+                        "confidential-computing": {
+                            "type": "boolean"
                         },
                         "container": {
                             "type": "string"
@@ -36224,6 +36245,9 @@
                         },
                         "arch": {
                             "type": "string"
+                        },
+                        "confidential-computing": {
+                            "type": "boolean"
                         },
                         "container": {
                             "type": "string"
