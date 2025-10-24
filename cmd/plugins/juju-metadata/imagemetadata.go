@@ -58,7 +58,6 @@ func prepare(ctx *cmd.Context, controllerName string, store jujuclient.ClientSto
 	return environs.New(context.TODO(), environs.OpenParams{
 		Cloud:          params.Cloud,
 		Config:         cfg,
-		ControllerUUID: bootstrapConfig.ControllerConfig.ControllerUUID(),
 	})
 }
 
